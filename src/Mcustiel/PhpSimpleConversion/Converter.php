@@ -1,6 +1,7 @@
 <?php
 namespace Mcustiel\PhpSimpleConversion;
 
-interface Converter {
+interface Converter
+{
     function convert($object);
 }

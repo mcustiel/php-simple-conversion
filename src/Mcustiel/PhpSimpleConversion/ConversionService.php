@@ -5,22 +5,27 @@ use Mcustiel\PhpSimpleConversion\Exception\TryingInvalidConversionException;
 
 class ConversionService
 {
+    /**
+     *
+     * @var ConverterContainer
+     */
     private $container;
 
-    public function __construct()
+    public function __construct(ConverterContainer $container = null)
     {
-        $this->container = ConverterContainer::getInstance();
+        $this->container = $container === null ?
+            ConverterContainer::getInstance() : $container;
     }
 
     public function convert($object, $toClass)
     {
         $from = $this->getTypeOf($object);
         $converter = $this->container->getConverter($from, $toClass);
-        
+
         return $converter->convert($object);
     }
 
-    private function gettypeOf($object)
+    private function getTypeOf($object)
     {
         $type = gettype($object);
         switch ($type) {

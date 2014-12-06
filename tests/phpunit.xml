@@ -6,6 +6,10 @@
 		<!-- CHANGE TO "." WHEN OTHER BILLING TESTS OK -->
 		<directory>./integration</directory>
 	</testsuite>
+	<testsuite name="PhpSimpleConversionUnitTests">
+        <!-- CHANGE TO "." WHEN OTHER BILLING TESTS OK -->
+        <directory>./unit</directory>
+    </testsuite>
 	<php>
 		<ini name="display_startup_errors" value="1" />
 		<ini name="display_errors" value="1" />

@@ -20,8 +20,7 @@ class ConversionTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->conversionService = ConverterContainer::getInstance();
-        $builder = ConverterBuilder::get()
-            ->from(A::class)
+        $builder = ConverterBuilder::get()->from(A::class)
             ->to(B::class)
             ->withImplementation(AToBConverter::class);
         $this->conversionService->addConverter($builder);
@@ -29,41 +28,46 @@ class ConversionTest extends \PHPUnit_Framework_TestCase
 
     public function testIfConverterContainerSavesAndReturnsCorrectly()
     {
-        $this->assertInstanceOf(
-            Converter::class,
-            $this->conversionService->getConverter(A::class, B::class)
-        );
+        $this->assertInstanceOf(Converter::class,
+            $this->conversionService->getConverter(A::class, B::class));
     }
 
     public function testIfConverterWorksCorrectlyWhenCalled()
     {
-        $a = new A(1, json_encode([
-            'firstName' => 'john',
-            'lastName' => 'doe',
-            'age' => 30
-        ]));
+        $a = $this->buildAClass();
         $converter = $this->conversionService->getConverter(A::class, B::class);
         $b = $converter->convert($a);
 
+        $this->assertBIsCorrect($b);
+    }
+
+    public function testConverterUsingWrapper()
+    {
+        $a = $this->buildAClass();
+
+        $service = new ConversionService();
+        $b = $service->convert($a, B::class);
+
+        $this->assertBIsCorrect($b);
+    }
+
+    private function assertBIsCorrect($b)
+    {
         $this->assertEquals(1, $b->getId());
         $this->assertEquals('john', $b->getFirstName());
         $this->assertEquals('doe', $b->getLastName());
         $this->assertEquals(30, $b->getAge());
     }
 
-    public function testConverterWrapper()
+    private function buildAClass()
     {
-        $a = new A(1, json_encode([
-            'firstName' => 'john',
-            'lastName' => 'doe',
-            'age' => 30
-        ]));
-        $service = new ConversionService();
-        $b = $service->convert($a, B::class);
-
-        $this->assertEquals(1, $b->getId());
-        $this->assertEquals('john', $b->getFirstName());
-        $this->assertEquals('doe', $b->getLastName());
-        $this->assertEquals(30, $b->getAge());
+        $a = new A(1,
+            json_encode(
+                array(
+                    'firstName' => 'john',
+                    'lastName' => 'doe',
+                    'age' => 30
+                )));
+        return $a;
     }
 }

@@ -22,7 +22,8 @@ class ConverterBuilder
     private $converter;
 
     private function __construct()
-    {}
+    {
+    }
 
     public static function get()
     {
