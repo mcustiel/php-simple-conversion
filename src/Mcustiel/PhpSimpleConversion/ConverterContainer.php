@@ -82,7 +82,11 @@ class ConverterContainer
      * @param string $from The type from which the converter converts.
      * @param string $to   The type to which the converter converts to.
      *
-     * @throws Mcustiel\PhpSimpleConversion\Exception\ConverterDoesNotExistException If the converter implementation were not set in the builder
+     * @throws Mcustiel\PhpSimpleConversion\Exception\ConverterDoesNotExistException If the
+     *                                                                               converter
+     *                                                                               implementation
+     *                                                                               were not set in
+     *                                                                               the builder
      *
      * @return Converter
      */

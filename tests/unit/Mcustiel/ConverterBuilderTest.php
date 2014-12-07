@@ -44,4 +44,14 @@ class ConverterBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = ConverterBuilder::get();
         $builder->from(5);
     }
+
+    /**
+     * @expectedException         \InvalidArgumentException
+     * @expectedExceptionMesesage 'To' parameter should be a string containing 'string', 'array', or a class name
+     */
+    public function testSetToWithInvalidValue()
+    {
+        $builder = ConverterBuilder::get();
+        $builder->to(5);
+    }
 }

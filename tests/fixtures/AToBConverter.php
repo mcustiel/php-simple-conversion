@@ -19,6 +19,9 @@ namespace Fixtures;
 
 use Mcustiel\PhpSimpleConversion\Converter;
 
+/**
+ * @codeCoverageIgnore
+ */
 class AToBConverter implements Converter
 {
     public function convert($a)

@@ -64,7 +64,8 @@ class ConverterBuilder
     /**
      * Specifies from which type the converter will convert.
      *
-     * @param string $from A string specifying the 'from' type. It must be 'string', 'array' or the full name of a class.
+     * @param string $from A string specifying the 'from' type. It must be 'string', 'array' or
+     *                     the full name of a class.
      *
      * @throws \InvalidArgumentException When given parameter is not a string
      * @return \Mcustiel\PhpSimpleConversion\ConverterBuilder

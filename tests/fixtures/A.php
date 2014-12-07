@@ -17,6 +17,9 @@
  */
 namespace Fixtures;
 
+/**
+ * @codeCoverageIgnore
+ */
 class A {
     private $id;
     private $jsonString;

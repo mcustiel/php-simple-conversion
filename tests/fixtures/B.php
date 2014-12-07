@@ -17,6 +17,9 @@
  */
 namespace Fixtures;
 
+/**
+ * @codeCoverageIgnore
+ */
 class B
 {
     private $id;
