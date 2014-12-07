@@ -64,7 +64,7 @@ class ConverterBuilder
 
     public function withImplementation($class)
     {
-        $this->converter = function () use($class)
+        $this->converter = function () use ($class)
         {
             $object = new $class;
             if (! is_subclass_of($object, Converter::class)) {
