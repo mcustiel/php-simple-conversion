@@ -18,6 +18,7 @@
 namespace Mcustiel\PhpSimpleConversion;
 
 use Mcustiel\PhpSimpleConversion\Exception\ConverterDoesNotExistException;
+
 class ConverterContainer
 {
     /**
@@ -36,7 +37,8 @@ class ConverterContainer
     {
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$instance === null) {
             self::$instance = new self;
         }

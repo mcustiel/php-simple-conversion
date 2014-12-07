@@ -49,8 +49,9 @@ class ConverterBuilder
     public function from($from)
     {
         if (!is_string($from)) {
-            throw new \InvalidArgumentException("'From' parameter should be a string containing "
-                . "'string', 'array', or a class name");
+            throw new \InvalidArgumentException(
+                "'From' parameter should be a string containing 'string', 'array', or a class name"
+            );
         }
         $this->from = $from;
 
@@ -60,8 +61,9 @@ class ConverterBuilder
     public function to($to)
     {
         if (!is_string($to)) {
-            throw new \InvalidArgumentException("'To' parameter should be a string containing "
-                . "'string', 'array', or a class name");
+            throw new \InvalidArgumentException(
+                "'To' parameter should be a string containing 'string', 'array', or a class name"
+            );
         }
         $this->to = $to;
 
@@ -80,12 +82,12 @@ class ConverterBuilder
 
     public function withImplementation($class)
     {
-        $this->converter = function () use ($class)
-        {
+        $this->converter = function () use ($class) {
             $object = new $class;
             if (! is_subclass_of($object, Converter::class)) {
                 throw new ObjectIsNotConverterException(
-                    "Object of type {$class} does not implement " . Converter::class);
+                    "Object of type {$class} does not implement " . Converter::class
+                );
             }
 
             return $object;

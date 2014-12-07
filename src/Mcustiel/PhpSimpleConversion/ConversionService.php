@@ -52,8 +52,8 @@ class ConversionService
                 return get_class($object);
             default:
                 throw new TryingInvalidConversionException(
-                    "Trying to convert from '{$type}'. " .
-                         'Can only convert from string, array or object');
+                    "Trying to convert from '{$type}'. Can only convert from string, array or object"
+                );
         }
     }
 

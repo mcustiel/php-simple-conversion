@@ -19,5 +19,5 @@ namespace Mcustiel\PhpSimpleConversion;
 
 interface Converter
 {
-    function convert($object);
+    public function convert($object);
 }
