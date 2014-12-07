@@ -51,6 +51,21 @@ class ConversionTest extends \PHPUnit_Framework_TestCase
         $this->assertBIsCorrect($b);
     }
 
+    /**
+     * @expectedException        \Mcustiel\PhpSimpleConversion\Exception\ObjectIsNotConverterException
+     * @expectedExceptionMessage Object of type stdClass does not implement Mcustiel\PhpSimpleConversion\Converter
+     */
+    public function testShouldThrowAnExceptionWhenImplementationIsNotConverter()
+    {
+        $this->conversionService = ConverterContainer::getInstance();
+        $builder = ConverterBuilder::get()
+            ->from(B::class)
+            ->to(A::class)
+            ->withImplementation(\stdClass::class);
+        $this->conversionService->addConverter($builder);
+        $converter = $this->conversionService->getConverter(B::class, A::class);
+    }
+
     private function assertBIsCorrect($b)
     {
         $this->assertEquals(1, $b->getId());
