@@ -60,11 +60,6 @@ class ConverterBuilder
 
     public function to($to)
     {
-        if (!is_string($to)) {
-            throw new \InvalidArgumentException(
-                "'To' parameter should be a string containing 'string', 'array', or a class name"
-            );
-        }
         $this->to = $to;
 
         return $this;
