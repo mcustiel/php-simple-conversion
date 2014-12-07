@@ -34,7 +34,7 @@ class ConverterContainer
 
     /**
      *
-     * @var ConverterBuilder[][]
+     * @var ConverterBuilder|Converter[][]
      */
     private $converters;
 
@@ -97,7 +97,11 @@ class ConverterContainer
                 "Converter from {$from} to {$to} does not exist"
             );
         }
+        $converter = $this->converters[$from][$to];
+        if ($converter instanceof ConverterBuilder) {
+            $this->converters[$from][$to] = $converter->getConverter();
+        }
 
-        return $this->converters[$from][$to]->getConverter();
+        return $this->converters[$from][$to];
     }
 }

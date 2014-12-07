@@ -30,7 +30,7 @@ class PerformanceTest extends \PHPUnit_Framework_TestCase
             for ($i = $cycles; $i > 0; $i--) {
                 $b = $service->convert($a, B::class);
             }
-            echo "\n{$cycles} cycles executed in " . (microtime(true) - $start) . " microseconds\n";
+            echo "\n{$cycles} cycles executed in " . (microtime(true) - $start) . " seconds\n";
         }
     }
 }
