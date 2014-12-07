@@ -117,4 +117,4 @@ The library will automatically take care of resolving the registered service and
 Notes
 -----
 
-* Currently you can only set 'string', 'array' or a full class name as 'from' and 'to' parameters in the converter builder.
+Currently you can only set 'string', 'array' or a full class name as 'from' and 'to' parameters in the converter builder.
