@@ -19,6 +19,12 @@ namespace Mcustiel\PhpSimpleConversion;
 
 use Mcustiel\PhpSimpleConversion\Exception\TryingInvalidConversionException;
 
+/**
+ * Service class for PhpSimpleConversion. It's used to access all the service
+ * provided by the library, which basically are register converters and do conversions.
+ *
+ * @author mcustiel
+ */
 class ConversionService
 {
     /**
@@ -33,6 +39,12 @@ class ConversionService
             ConverterContainer::getInstance() : $container;
     }
 
+    /**
+     * Converts a given object to another type.
+     *
+     * @param string|array|object $object  The object to convert.
+     * @param string              $toClass The name of the class to which the object will be converted
+     */
     public function convert($object, $toClass)
     {
         $from = $this->getTypeOf($object);
@@ -41,11 +53,22 @@ class ConversionService
         return $converter->convert($object);
     }
 
+    /**
+     * Registers a converter in the library for future use.
+     *
+     * @param ConverterBuilder $builder The converter builder that creates the converter to register
+     */
+    public function registerConverter(ConverterBuilder $builder)
+    {
+        $this->container->addConverter($builder);
+    }
+
     private function getTypeOf($object)
     {
         $type = gettype($object);
         switch ($type) {
             case 'string':
+                // This break was ommited intencionally
             case 'array':
                 return $type;
             case 'object':
@@ -55,10 +78,5 @@ class ConversionService
                     "Trying to convert from '{$type}'. Can only convert from string, array or object"
                 );
         }
-    }
-
-    public function registerConverter(ConverterBuilder $builder)
-    {
-        $this->container->addConverter($builder);
     }
 }

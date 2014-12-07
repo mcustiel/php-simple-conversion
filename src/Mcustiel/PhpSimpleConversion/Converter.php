@@ -17,7 +17,17 @@
  */
 namespace Mcustiel\PhpSimpleConversion;
 
+/**
+ * Interface to implement when creating a converter.
+ *
+ * @author mcustiel
+ */
 interface Converter
 {
+    /**
+     * Converts the given object.
+     *
+     * @param string|array|object $object The object to convert.
+     */
     public function convert($object);
 }

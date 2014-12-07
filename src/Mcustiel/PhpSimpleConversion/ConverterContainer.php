@@ -19,6 +19,11 @@ namespace Mcustiel\PhpSimpleConversion;
 
 use Mcustiel\PhpSimpleConversion\Exception\ConverterDoesNotExistException;
 
+/**
+ * Singleton class the holds all the registered converters, and allows to access them.
+ *
+ * @author mcustiel
+ */
 class ConverterContainer
 {
     /**
@@ -33,18 +38,33 @@ class ConverterContainer
      */
     private $converters;
 
+    /**
+     * This is singleton, can't be instantiated directly.
+     */
     private function __construct()
     {
     }
 
+    /**
+     * Get the instance of this class.
+     *
+     * @return \Mcustiel\PhpSimpleConversion\ConverterContainer
+     */
     public static function getInstance()
     {
         if (self::$instance === null) {
             self::$instance = new self;
         }
+
         return self::$instance;
     }
 
+    /**
+     * Registers a converter.
+     *
+     * @param ConverterBuilder $converter The builder of the converter to register.
+     * @throws \InvalidArgumentException If from or to are unset.
+     */
     public function addConverter(ConverterBuilder $converter)
     {
         if ($converter->getFrom() == null) {
@@ -56,6 +76,16 @@ class ConverterContainer
         $this->converters[$converter->getFrom()][$converter->getTo()] = $converter;
     }
 
+    /**
+     * Access the implementation of the converter for the given from and to parameters.
+     *
+     * @param string $from The type from which the converter converts.
+     * @param string $to   The type to which the converter converts to.
+     *
+     * @throws Mcustiel\PhpSimpleConversion\Exception\ConverterDoesNotExistException If the converter implementation were not set in the builder
+     *
+     * @return Converter
+     */
     public function getConverter($from, $to)
     {
         if (!isset($this->converters[$from][$to])) {

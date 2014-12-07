@@ -19,6 +19,13 @@ namespace Mcustiel\PhpSimpleConversion;
 
 use Mcustiel\PhpSimpleConversion\Exception\ObjectIsNotConverterException;
 
+/**
+ * Builder used to register Converters into the library. It implments a fluent interface to
+ * define the needed values to register the converter.
+ *
+ * @author mcustiel
+ *
+ */
 class ConverterBuilder
 {
     /**
@@ -37,15 +44,31 @@ class ConverterBuilder
      */
     private $converter;
 
+    /**
+     * This class can't be instantiated.
+     */
     private function __construct()
     {
     }
 
+    /**
+     * Creates a ConverterBuilder instance.
+     *
+     * @return \Mcustiel\PhpSimpleConversion\ConverterBuilder
+     */
     public static function get()
     {
         return new self();
     }
 
+    /**
+     * Specifies from which type the converter will convert.
+     *
+     * @param string $from A string specifying the 'from' type. It must be 'string', 'array' or the full name of a class.
+     *
+     * @throws \InvalidArgumentException When given parameter is not a string
+     * @return \Mcustiel\PhpSimpleConversion\ConverterBuilder
+     */
     public function from($from)
     {
         if (!is_string($from)) {
@@ -58,23 +81,51 @@ class ConverterBuilder
         return $this;
     }
 
+    /**
+     * Specifies to which type the converter will convert to.
+     *
+     * @param string $to A string specifying the destination type of the conversion.
+     *
+     * @throws \InvalidArgumentException When given parameter is not a string
+     * @return \Mcustiel\PhpSimpleConversion\ConverterBuilder
+     */
     public function to($to)
     {
+        if (!is_string($to)) {
+            throw new \InvalidArgumentException(
+                "'To' parameter should be a string containing a type name"
+            );
+        }
         $this->to = $to;
 
         return $this;
     }
 
+    /**
+     * Returns the value of 'to'
+     *
+     * @return string
+     */
     public function getTo()
     {
         return $this->to;
     }
 
+    /**
+     * Returns the value of 'from'
+     */
     public function getFrom()
     {
         return $this->from;
     }
 
+    /**
+     * Specifies the name of the class that implements the Converter for the given to and from parameters.
+     *
+     * @param string $class The name of the converter class
+     *
+     * @return \Mcustiel\PhpSimpleConversion\ConverterBuilder
+     */
     public function withImplementation($class)
     {
         $this->converter = function () use ($class) {
@@ -91,6 +142,11 @@ class ConverterBuilder
         return $this;
     }
 
+    /**
+     * Returns an instance of the converter.
+     *
+     * @return mixed The return value of the convert method in the converter implementation.
+     */
     public function getConverter()
     {
         return call_user_func($this->converter);
