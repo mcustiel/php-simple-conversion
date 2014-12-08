@@ -1,9 +1,9 @@
 {
     "keywords" : [
-        "config",
-        "manager",
-        "multiformat",
-        "abstraction"
+        "minimalist",
+        "converter",
+        "abstraction",
+        "simple"
     ],
     "autoload" : {
         "psr-4" : {
