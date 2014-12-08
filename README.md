@@ -64,7 +64,7 @@ You need a service that abstracts the access to database from the logic, in that
 ```php
 use Mcustiel\PhpSimpleConversion\Converter;
 
-// class DBPersonToLogicPersonConverter (should implement Converter interface)
+// class DBPersonToLogicPersonConverter (MUST implement Converter interface)
 class DBPersonToLogicPersonConverter implements Converter
 {
     public function convert($a)
