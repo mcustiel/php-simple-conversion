@@ -11,7 +11,16 @@ Installation
 
 ### Composer:
 
-Adding this to your composer.json should be enough, this project wasn't added to packagist yet:
+This project is published in packagist, so you just need to add it as a dependency in your composer.json:
+
+```javascript
+"require": {
+        // ...
+        "mcustiel/php-simple-conversion": "1.0.*"
+    }
+```
+
+If you want to access directly to this repo, adding this to your composer.json should be enough:
 ```javascript  
 {
     "repositories": [
