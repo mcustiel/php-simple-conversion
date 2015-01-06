@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace Mcustiel\PhpSimpleConversion;
+namespace Mcustiel\Conversion;
 
-use Mcustiel\PhpSimpleConversion\Exception\ObjectIsNotConverterException;
+use Mcustiel\Conversion\Exception\ObjectIsNotConverterException;
 
 /**
  * Builder used to register Converters into the library. It implments a fluent interface to
@@ -54,7 +54,7 @@ class ConverterBuilder
     /**
      * Creates a ConverterBuilder instance.
      *
-     * @return \Mcustiel\PhpSimpleConversion\ConverterBuilder
+     * @return \Mcustiel\Conversion\ConverterBuilder
      */
     public static function get()
     {
@@ -68,7 +68,7 @@ class ConverterBuilder
      *                     the full name of a class.
      *
      * @throws \InvalidArgumentException When given parameter is not a string
-     * @return \Mcustiel\PhpSimpleConversion\ConverterBuilder
+     * @return \Mcustiel\Conversion\ConverterBuilder
      */
     public function from($from)
     {
@@ -88,7 +88,7 @@ class ConverterBuilder
      * @param string $to A string specifying the destination type of the conversion.
      *
      * @throws \InvalidArgumentException When given parameter is not a string
-     * @return \Mcustiel\PhpSimpleConversion\ConverterBuilder
+     * @return \Mcustiel\Conversion\ConverterBuilder
      */
     public function to($to)
     {
@@ -125,7 +125,7 @@ class ConverterBuilder
      *
      * @param string $class The name of the converter class
      *
-     * @return \Mcustiel\PhpSimpleConversion\ConverterBuilder
+     * @return \Mcustiel\Conversion\ConverterBuilder
      */
     public function withImplementation($class)
     {

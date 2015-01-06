@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace Mcustiel\PhpSimpleConversion;
+namespace Mcustiel\Conversion;
 
-use Mcustiel\PhpSimpleConversion\Exception\ConverterDoesNotExistException;
+use Mcustiel\Conversion\Exception\ConverterDoesNotExistException;
 
 /**
  * Singleton class the holds all the registered converters, and allows to access them.
@@ -48,7 +48,7 @@ class ConverterContainer
     /**
      * Get the instance of this class.
      *
-     * @return \Mcustiel\PhpSimpleConversion\ConverterContainer
+     * @return \Mcustiel\Conversion\ConverterContainer
      */
     public static function getInstance()
     {
@@ -82,7 +82,7 @@ class ConverterContainer
      * @param string $from The type from which the converter converts.
      * @param string $to   The type to which the converter converts to.
      *
-     * @throws Mcustiel\PhpSimpleConversion\Exception\ConverterDoesNotExistException If the
+     * @throws Mcustiel\Conversion\Exception\ConverterDoesNotExistException If the
      *                                                                               converter
      *                                                                               implementation
      *                                                                               were not set in

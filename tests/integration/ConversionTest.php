@@ -15,21 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace Integration\PhpSimpleConversion;
+namespace Integration;
 
-use Mcustiel\PhpSimpleConversion\ConverterContainer;
-use Mcustiel\PhpSimpleConversion\ConverterBuilder;
+use Mcustiel\Conversion\ConverterContainer;
+use Mcustiel\Conversion\ConverterBuilder;
 use Fixtures\A;
 use Fixtures\B;
 use Fixtures\AToBConverter;
-use Mcustiel\PhpSimpleConversion\Converter;
-use Mcustiel\PhpSimpleConversion\ConversionService;
+use Mcustiel\Conversion\Converter;
+use Mcustiel\Conversion\ConversionService;
 
 class ConversionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      *
-     * @var \Mcustiel\PhpSimpleConversion\ConverterContainer
+     * @var \Mcustiel\Conversion\ConverterContainer
      */
     private $conversionService;
 
@@ -68,8 +68,8 @@ class ConversionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        \Mcustiel\PhpSimpleConversion\Exception\ObjectIsNotConverterException
-     * @expectedExceptionMessage Object of type stdClass does not implement Mcustiel\PhpSimpleConversion\Converter
+     * @expectedException        \Mcustiel\Conversion\Exception\ObjectIsNotConverterException
+     * @expectedExceptionMessage Object of type stdClass does not implement Mcustiel\Conversion\Converter
      */
     public function testShouldThrowAnExceptionWhenImplementationIsNotConverter()
     {

@@ -17,7 +17,7 @@
  */
 namespace Fixtures;
 
-use Mcustiel\PhpSimpleConversion\Converter;
+use Mcustiel\Conversion\Converter;
 
 /**
  * @codeCoverageIgnore

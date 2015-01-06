@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace Mcustiel\PhpSimpleConversion;
+namespace Mcustiel\Conversion;
 
-use Mcustiel\PhpSimpleConversion\Exception\TryingInvalidConversionException;
+use Mcustiel\Conversion\Exception\TryingInvalidConversionException;
 
 /**
  * Service class for PhpSimpleConversion. It's used to access all the service

@@ -17,7 +17,7 @@
  */
 namespace Unit;
 
-use Mcustiel\PhpSimpleConversion\ConverterBuilder;
+use Mcustiel\Conversion\ConverterBuilder;
 use Fixtures\AToBConverter;
 use Fixtures\B;
 use Fixtures\A;

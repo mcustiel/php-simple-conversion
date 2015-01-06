@@ -15,14 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace Mcustiel\PhpSimpleConversion\Exception;
+namespace Mcustiel\Conversion\Exception;
 
-class ConverterDoesNotExistException extends PhpSimpleConversionException
+class PhpSimpleConversionException extends \Exception
 {
-    const DEFAULT_CODE = 2;
-
-    public function __construct($message, $previous = null)
-    {
-        parent::__construct($message, self::DEFAULT_CODE, $previous);
-    }
 }

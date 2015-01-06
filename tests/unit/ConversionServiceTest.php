@@ -17,13 +17,13 @@
  */
 namespace Unit;
 
-use Mcustiel\PhpSimpleConversion\ConversionService;
-use Mcustiel\PhpSimpleConversion\ConverterContainer;
-use Mcustiel\PhpSimpleConversion\ConverterBuilder;
+use Mcustiel\Conversion\ConversionService;
+use Mcustiel\Conversion\ConverterContainer;
+use Mcustiel\Conversion\ConverterBuilder;
 use Fixtures\A;
 use Fixtures\B;
 use Fixtures\AToBConverter;
-use Mcustiel\PhpSimpleConversion\Converter;
+use Mcustiel\Conversion\Converter;
 
 class ConversionServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -112,7 +112,7 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        \Mcustiel\PhpSimpleConversion\Exception\TryingInvalidConversionException
+     * @expectedException        \Mcustiel\Conversion\Exception\TryingInvalidConversionException
      * @expectedExceptionMessage Trying to convert from 'integer'. Can only convert from string, array or object
      */
     public function testShouldThrowExceptionWhenCalledWithInvalidFromType()
