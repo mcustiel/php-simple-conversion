@@ -54,7 +54,7 @@
 	<!-- ============================================ -->
 	<target name="codecheck">
 		<phingcall target="codestyle" />
-		<!--<phingcall target="mess" />-->
+		<phingcall target="mess" />
 		<phingcall target="copypaste" />
 	</target>
 
@@ -91,12 +91,13 @@
 	<!-- Target: mess (Detects mess in code. Recommended rulesets: unusedcode,codesize,controversial,design,naming) -->
 	<!-- ============================================ -->
 	<target name="mess">
-		<echo msg="Running mess detector" />
-		<phpmd rulesets="unusedcode,codesize">
-			<fileset refid="sources" />
-			<formatter type="xml" outfile="${dir.reports}/pmd.xml" />
-		</phpmd>
-	</target>
+	        <echo msg="Running mess detector" />
+	        <exec 
+	            command="./vendor/bin/phpmd ${dir.base}/src xml unusedcode,codesize,controversial,design,naming --reportfile ${dir.reports}/pmd.xml" 
+	            outputProperty="output"
+	        />
+	        <echo msg="${output}" />
+	    </target>
 
 	<!-- ============================================ -->
 	<!-- Target: copypaste (detects copy/paste in code) -->
