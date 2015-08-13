@@ -36,20 +36,58 @@ class ConversionTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->conversionService = ConverterContainer::getInstance();
-        $builder = ConverterBuilder::get()->from(A::class)
-            ->to(B::class)
-            ->withImplementation(AToBConverter::class);
-        $this->conversionService->addConverter($builder);
     }
 
-    public function testIfConverterContainerSavesAndReturnsCorrectly()
+    public function testIfConverterContainerSavesAndReturnsCorrectlyUsingInstance()
     {
-        $this->assertInstanceOf(Converter::class,
-            $this->conversionService->getConverter(A::class, B::class));
+        $this->conversionService = ConverterContainer::getInstance();
+        $builder = ConverterBuilder::get()
+            ->from(A::class)
+            ->to(B::class)
+            ->withImplementation(new AToBConverter());
+
+        $this->conversionService->addConverter($builder);
+
+        $converter = $this->conversionService->getConverter(A::class, B::class);
+        $this->assertInstanceOf(
+            Converter::class,
+            $converter
+        );
+
+        $a = $this->buildAClass();
+        $b = $converter->convert($a);
+        $this->assertBIsCorrect($b);
+    }
+
+    /**
+     * @expectedException        \Mcustiel\Conversion\Exception\ObjectIsNotConverterException
+     * @expectedExceptionMessage Object of type stdClass does not implement Mcustiel\Conversion\Converter
+     */
+    public function testIfConverterContainerFailsUsingInstanceOfIncorrectType()
+    {
+        $this->conversionService = ConverterContainer::getInstance();
+        $builder = ConverterBuilder::get()
+            ->from(A::class)
+            ->to(B::class)
+            ->withImplementation(new \stdClass());
+
+        $this->conversionService->addConverter($builder);
+
+        $converter = $this->conversionService->getConverter(A::class, B::class);
+    }
+
+    public function testIfConverterContainerSavesAndReturnsCorrectlyUsingClass()
+    {
+        $this->addDefaultConverter();
+        $this->assertInstanceOf(
+            Converter::class,
+            $this->conversionService->getConverter(A::class, B::class)
+        );
     }
 
     public function testIfConverterWorksCorrectlyWhenCalled()
     {
+        $this->addDefaultConverter();
         $a = $this->buildAClass();
         $converter = $this->conversionService->getConverter(A::class, B::class);
         $b = $converter->convert($a);
@@ -59,6 +97,7 @@ class ConversionTest extends \PHPUnit_Framework_TestCase
 
     public function testConverterUsingWrapper()
     {
+        $this->addDefaultConverter();
         $a = $this->buildAClass();
 
         $service = new ConversionService();
@@ -100,5 +139,14 @@ class ConversionTest extends \PHPUnit_Framework_TestCase
                     'age' => 30
                 )));
         return $a;
+    }
+
+    private function addDefaultConverter()
+    {
+        $builder = ConverterBuilder::get()
+        ->from(A::class)
+        ->to(B::class)
+        ->withImplementation(AToBConverter::class);
+        $this->conversionService->addConverter($builder);
     }
 }

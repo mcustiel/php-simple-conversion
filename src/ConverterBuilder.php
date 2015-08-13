@@ -130,10 +130,11 @@ class ConverterBuilder
     public function withImplementation($class)
     {
         $this->converter = function () use ($class) {
-            $object = new $class;
-            if (! is_subclass_of($object, Converter::class)) {
+            $object = $this->getObjectFromClass($class);
+
+            if (!is_subclass_of($object, Converter::class)) {
                 throw new ObjectIsNotConverterException(
-                    "Object of type {$class} does not implement " . Converter::class
+                    'Object of type ' . get_class($object) . ' does not implement ' . Converter::class
                 );
             }
 
@@ -142,6 +143,16 @@ class ConverterBuilder
 
         return $this;
     }
+
+    private function getObjectFromClass($class)
+    {
+        if (is_object($class)) {
+            return $class;
+        }
+
+        return new $class;
+    }
+
 
     /**
      * Returns an instance of the converter.

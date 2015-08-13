@@ -112,7 +112,7 @@ $conversionService = new ConversionService();
 $converter = ConverterBuilder::get()
     ->from(DatabaseRegisterRepresentationForPerson::class)
     ->to(DomainRepresentationForPerson::class)
-    ->withImplementation(DBPersonToLogicPersonConverter::class);
+    ->withImplementation(DBPersonToLogicPersonConverter::class); // Implementation could be the name of the class or an instance
 $conversionService->registerConverter($converter);
 ```
 

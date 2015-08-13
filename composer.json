@@ -18,7 +18,7 @@
 		}
 	},
 	"name" : "mcustiel/php-simple-conversion",
-	"version" : "1.2.0",
+	"version" : "1.2.1",
 	"type" : "library",
 	"description" : "A simple and minimalistic library to ease conversion between different types",
 	"license" : "GPL-3.0+",
