@@ -49,7 +49,8 @@ How to use it?
 First of all, you have to define the converters you will use. As an example, supose you have two classes that represents a Person: one of them represents it in the format it is persisted in db, the other represents it as used in application's logic.
 
 ```php
-class DatabaseRegisterRepresentationForPerson {
+class DatabaseRegisterRepresentationForPerson 
+{
     private $id;
     private $jsonString;
 
