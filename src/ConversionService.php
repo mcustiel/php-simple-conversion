@@ -33,10 +33,12 @@ class ConversionService
      */
     private $container;
 
+    /**
+     * @param SingletonConverterContainer $container
+     */
     public function __construct(ConverterContainer $container = null)
     {
-        $this->container = $container === null ?
-            ConverterContainer::getInstance() : $container;
+        $this->container = $container ?: SingletonConverterContainer::getInstance();
     }
 
     /**
@@ -63,20 +65,22 @@ class ConversionService
         $this->container->addConverter($builder);
     }
 
+    /**
+     * @param mixed $object
+     * @throws TryingInvalidConversionException
+     * @return string
+     */
     private function getTypeOf($object)
     {
         $type = gettype($object);
-        switch ($type) {
-            case 'string':
-                // This break was ommited intencionally
-            case 'array':
-                return $type;
-            case 'object':
-                return get_class($object);
-            default:
-                throw new TryingInvalidConversionException(
-                    "Trying to convert from '{$type}'. Can only convert from string, array or object"
-                );
+        if ($type === 'string' || $type === 'array') {
+            return $type;
         }
+        if ($type === 'object') {
+            return get_class($object);
+        }
+        throw new TryingInvalidConversionException(
+            "Trying to convert from '{$type}'. Can only convert from string, array or object"
+        );
     }
 }

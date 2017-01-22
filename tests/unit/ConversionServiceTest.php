@@ -18,7 +18,6 @@
 namespace Unit;
 
 use Mcustiel\Conversion\ConversionService;
-use Mcustiel\Conversion\ConverterContainer;
 use Mcustiel\Conversion\ConverterBuilder;
 use Fixtures\A;
 use Fixtures\B;

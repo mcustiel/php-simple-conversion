@@ -15,9 +15,3 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-$loader = require __DIR__ . "/../vendor/autoload.php";
-
-$loader->addPsr4('Unit\\', __DIR__ . '/unit');
-$loader->addPsr4('Integration\\', __DIR__ . '/integration');
-$loader->addPsr4('Fixtures\\', __DIR__ . '/fixtures');

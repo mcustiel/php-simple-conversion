@@ -20,7 +20,8 @@ namespace Fixtures;
 /**
  * @codeCoverageIgnore
  */
-class A {
+class A
+{
     private $id;
     private $jsonString;
 

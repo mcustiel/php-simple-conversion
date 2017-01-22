@@ -17,91 +17,16 @@
  */
 namespace Mcustiel\Conversion;
 
-use Mcustiel\Conversion\Exception\ConverterDoesNotExistException;
-
-/**
- * Singleton class the holds all the registered converters, and allows to access them.
- *
- * @author mcustiel
- */
-class ConverterContainer
+interface ConverterContainer
 {
     /**
-     *
-     * @var ConverterContainer
+     * @param ConverterBuilder $builder
      */
-    private static $instance;
-
+    public function addConverter(ConverterBuilder $builder);
+    
     /**
-     *
-     * @var ConverterBuilder|Converter[][]
+     * @param string $from
+     * @param string $to
      */
-    private $converters;
-
-    /**
-     * This is singleton, can't be instantiated directly.
-     */
-    private function __construct()
-    {
-    }
-
-    /**
-     * Get the instance of this class.
-     *
-     * @return \Mcustiel\Conversion\ConverterContainer
-     */
-    public static function getInstance()
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Registers a converter.
-     *
-     * @param ConverterBuilder $converter The builder of the converter to register.
-     * @throws \InvalidArgumentException If from or to are unset.
-     */
-    public function addConverter(ConverterBuilder $converter)
-    {
-        if ($converter->getFrom() == null) {
-            throw new \InvalidArgumentException("From is unset");
-        }
-        if ($converter->getTo() == null) {
-            throw new \InvalidArgumentException("To is unset");
-        }
-        $this->converters[$converter->getFrom()][$converter->getTo()] = $converter;
-    }
-
-    /**
-     * Access the implementation of the converter for the given from and to parameters.
-     *
-     * @param string $from The type from which the converter converts.
-     * @param string $to   The type to which the converter converts to.
-     *
-     * @throws Mcustiel\Conversion\Exception\ConverterDoesNotExistException If the
-     *                                                                               converter
-     *                                                                               implementation
-     *                                                                               were not set in
-     *                                                                               the builder
-     *
-     * @return Converter
-     */
-    public function getConverter($from, $to)
-    {
-        if (!isset($this->converters[$from][$to])) {
-            throw new ConverterDoesNotExistException(
-                "Converter from {$from} to {$to} does not exist"
-            );
-        }
-        $converter = $this->converters[$from][$to];
-        if ($converter instanceof ConverterBuilder) {
-            $this->converters[$from][$to] = $converter->getConverter();
-        }
-
-        return $this->converters[$from][$to];
-    }
+    public function getConverter($from, $to);
 }

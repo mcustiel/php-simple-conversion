@@ -21,7 +21,7 @@ use Mcustiel\Conversion\ConverterBuilder;
 use Fixtures\A;
 use Fixtures\B;
 use Fixtures\AToBConverter;
-use Mcustiel\Conversion\ConverterContainer;
+use Mcustiel\Conversion\SingletonConverterContainer;
 use Mcustiel\Conversion\ConversionService;
 
 class ConverterContainerTest extends \PHPUnit_Framework_TestCase
@@ -32,12 +32,12 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
             ->from(A::class)
             ->to(B::class)
             ->withImplementation(AToBConverter::class);
-        ConverterContainer::getInstance()
+        SingletonConverterContainer::getInstance()
             ->addConverter($builder);
 
         $this->assertInstanceOf(
             AToBConverter::class,
-            ConverterContainer::getInstance()->getConverter(A::class, B::class)
+            SingletonConverterContainer::getInstance()->getConverter(A::class, B::class)
         );
     }
 
@@ -50,7 +50,7 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
         $builder = ConverterBuilder::get()
             ->to(B::class)
             ->withImplementation(AToBConverter::class);
-        ConverterContainer::getInstance()
+        SingletonConverterContainer::getInstance()
             ->addConverter($builder);
     }
 
@@ -63,7 +63,7 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
         $builder = ConverterBuilder::get()
             ->from(A::class)
             ->withImplementation(AToBConverter::class);
-        ConverterContainer::getInstance()
+        SingletonConverterContainer::getInstance()
             ->addConverter($builder);
     }
 
@@ -73,7 +73,7 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldFailIfConverterNotRegistered()
     {
-        ConverterContainer::getInstance()->getConverter(\FileObject::class, \stdClass::class);
+        SingletonConverterContainer::getInstance()->getConverter(\FileObject::class, \stdClass::class);
     }
 
     /**
@@ -86,9 +86,9 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
             ->from(A::class)
             ->to(B::class)
             ->withImplementation(\stdClass::class);
-        ConverterContainer::getInstance()
+        SingletonConverterContainer::getInstance()
             ->addConverter($builder);
 
-        ConverterContainer::getInstance()->getConverter(A::class, B::class);
+        SingletonConverterContainer::getInstance()->getConverter(A::class, B::class);
     }
 }
