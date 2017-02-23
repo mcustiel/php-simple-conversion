@@ -128,6 +128,7 @@ Then you just need to inject the ConversionService to any class where you want t
 
 The library will automatically take care of resolving the registered service and calling it to convert your object to the desired one.
 
+
 Notes
 -----
 
