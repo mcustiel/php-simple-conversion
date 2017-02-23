@@ -17,6 +17,7 @@
  */
 namespace Unit;
 
+use Fixtures\C;
 use Mcustiel\Conversion\ConversionService;
 use Mcustiel\Conversion\ConverterContainer;
 use Mcustiel\Conversion\ConverterBuilder;
@@ -24,10 +25,17 @@ use Fixtures\A;
 use Fixtures\B;
 use Fixtures\AToBConverter;
 use Mcustiel\Conversion\Converter;
+use Mcustiel\Conversion\Exception\ConverterDoesNotExistException;
 
 class ConversionServiceTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var ConversionService
+     */
     private $service;
+    /**
+     * @var ConverterContainer|\PHPUnit_Framework_MockObject_MockObject
+     */
     private $containerMock;
 
     public function setUp()
@@ -120,6 +128,82 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
         $this->service->convert(5, B::class);
     }
 
+    public function testIfConvertsFromTheParentClass()
+    {
+        $converterMock = $this->getMockBuilder(Converter::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $toConvert = new C(1, '');
+
+        $this->containerMock
+            ->expects($this->exactly(2))
+            ->method('getConverter')
+            ->withConsecutive(
+                [$this->equalTo(C::class), $this->equalTo(B::class)],
+                [$this->equalTo(A::class), $this->equalTo(B::class)]
+            )
+            ->will(
+                $this->returnCallback(function ($from) use ($converterMock) {
+                    if ($from === C::class) {
+                        throw new ConverterDoesNotExistException('');
+                    }
+                    return $converterMock;
+                })
+            );
+
+        $expected = new B();
+        $converterMock
+            ->expects($this->once())
+            ->method('convert')
+            ->with($toConvert)
+            ->willReturn($expected);
+
+        $this->assertSame($expected, $this->service->convert($toConvert, B::class, true));
+    }
+
+    /**
+     * @expectedException \Mcustiel\Conversion\Exception\ConverterDoesNotExistException
+     */
+    public function testIfFailsWhenConvertingFromParentNotAllowed()
+    {
+        $converterMock = $this->getMockBuilder(Converter::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $toConvert = new C(1, '');
+
+        $this->containerMock
+            ->expects($this->once())
+            ->method('getConverter')
+            ->with($this->equalTo(C::class), $this->equalTo(B::class))
+            ->will($this->throwException(new ConverterDoesNotExistException('')));
+
+        $this->service->convert($toConvert, B::class);
+    }
+
+    /**
+     * @expectedException \Mcustiel\Conversion\Exception\ConverterDoesNotExistException
+     * @expectedExceptionMessage Converter from Fixtures\C to Fixtures\A does not exist
+     */
+    public function testIfNoConverterForParentClass()
+    {
+        $converterMock = $this->getMockBuilder(Converter::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $toConvert = new C(1, '');
+
+        $this->containerMock
+            ->expects($this->exactly(2))
+            ->method('getConverter')
+            ->withConsecutive(
+                [$this->equalTo(C::class), $this->equalTo(A::class)],
+                [$this->equalTo(A::class), $this->equalTo(A::class)]
+            )
+            ->willThrowException(new ConverterDoesNotExistException(''));
+        $this->service->convert($toConvert, A::class, true);
+    }
 
     private function getConverterBuilderToRegister()
     {
