@@ -1,0 +1,23 @@
+filter:
+  paths: [src/*]
+  excluded_paths: ["vendor/*", "tests/*"]
+before_commands:
+  - 'composer install --dev --prefer-source'
+filter:
+    excluded_paths:
+        - 'tests/*'
+checks:
+    php: true
+coding_style:
+    php: {  }
+build:
+  environment:
+    php:
+      version: 7.1
+  tests:
+    override:
+      -
+        command: './vendor/bin/phpunit -c tests --coverage-clover=clover.xml'
+        coverage:
+          file: 'clover.xml'
+          format: 'clover'
