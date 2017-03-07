@@ -37,9 +37,16 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
      * @var ConverterContainer|\PHPUnit_Framework_MockObject_MockObject
      */
     private $containerMock;
+    /**
+     * @var Converter|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $converterMock;
 
     public function setUp()
     {
+        $this->converterMock = $this->getMockBuilder(Converter::class)
+            ->disableOriginalConstructor()
+            ->getMock();
         $this->containerMock = $this->getMockBuilder(ConverterContainer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -59,19 +66,15 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldCallConverter()
     {
-        $converterMock = $this->getMockBuilder(Converter::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $toConvert = new A(1, '');
 
         $this->containerMock
             ->expects($this->once())
             ->method('getConverter')
             ->with($this->equalTo(A::class), $this->equalTo(B::class))
-            ->will($this->returnValue($converterMock));
+            ->will($this->returnValue($this->converterMock));
 
-        $converterMock
+        $this->converterMock
             ->expects($this->once())
             ->method('convert')
             ->with($toConvert);
@@ -81,17 +84,13 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldCallConverterToConvertAString()
     {
-        $converterMock = $this->getMockBuilder(Converter::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->containerMock
             ->expects($this->once())
             ->method('getConverter')
             ->with($this->equalTo('string'), $this->equalTo(B::class))
-            ->will($this->returnValue($converterMock));
+            ->will($this->returnValue($this->converterMock));
 
-        $converterMock
+        $this->converterMock
             ->expects($this->once())
             ->method('convert')
             ->with('aString');
@@ -101,17 +100,13 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldCallConverterToConvertAnArray()
     {
-        $converterMock = $this->getMockBuilder(Converter::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->containerMock
             ->expects($this->once())
             ->method('getConverter')
             ->with($this->equalTo('array'), $this->equalTo(B::class))
-            ->will($this->returnValue($converterMock));
+            ->will($this->returnValue($this->converterMock));
 
-        $converterMock
+        $this->converterMock
             ->expects($this->once())
             ->method('convert')
             ->with([]);
@@ -130,10 +125,6 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testIfConvertsFromTheParentClass()
     {
-        $converterMock = $this->getMockBuilder(Converter::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $toConvert = new C(1, '');
 
         $this->containerMock
@@ -144,16 +135,16 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
                 [$this->equalTo(A::class), $this->equalTo(B::class)]
             )
             ->will(
-                $this->returnCallback(function ($from) use ($converterMock) {
+                $this->returnCallback(function ($from) {
                     if ($from === C::class) {
                         throw new ConverterDoesNotExistException('');
                     }
-                    return $converterMock;
+                    return $this->converterMock;
                 })
             );
 
         $expected = new B();
-        $converterMock
+        $this->converterMock
             ->expects($this->once())
             ->method('convert')
             ->with($toConvert)
@@ -167,10 +158,6 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testIfFailsWhenConvertingFromParentNotAllowed()
     {
-        $converterMock = $this->getMockBuilder(Converter::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $toConvert = new C(1, '');
 
         $this->containerMock
@@ -188,10 +175,6 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testIfNoConverterForParentClass()
     {
-        $converterMock = $this->getMockBuilder(Converter::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $toConvert = new C(1, '');
 
         $this->containerMock
