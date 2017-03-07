@@ -6,10 +6,6 @@ What is it?
 
 php-simple-conversion is a minimalistic conversion service for PHP. It's meant to be performant and easy to use. It allows developers to register a series of converter classes that converts from one type to another. The converters are instantiated only when they are needed, minimizing memory use and avoiding unnecessary processing.
 
-#### Why Simple?
-
-My native language is spanish and the spanish definition of simple is __"Que es puramente aquello que se dice, sin ninguna característica especial o singular"__, which somehow translates to __"Something that is nothing more than what is told, without any special or singular characteristic"__. That's what I looked for in the design of this library, to be good in what it's intended for and nothing else.
-
 Installation
 ------------
 
