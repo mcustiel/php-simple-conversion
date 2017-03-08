@@ -9,6 +9,11 @@
 	<testsuite name="PhpSimpleConversionUnitTests">
         <!-- CHANGE TO "." WHEN OTHER BILLING TESTS OK -->
         <directory>./unit</directory>
+		<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">../src</directory>
+		</whitelist>
+	</filter>
     </testsuite>
 	<php>
 		<ini name="display_startup_errors" value="1" />
