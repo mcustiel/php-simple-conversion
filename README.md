@@ -6,6 +6,10 @@ What is it?
 
 php-simple-conversion is a minimalistic conversion service for PHP. It's meant to be performant and easy to use. It allows developers to register a series of converter classes that converts from one type to another. The converters are instantiated only when they are needed, minimizing memory use and avoiding unnecessary processing.
 
+[![Build Status](https://scrutinizer-ci.com/g/mcustiel/php-simple-conversion/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mcustiel/php-simple-conversion/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/mcustiel/php-simple-conversion/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mcustiel/php-simple-conversion/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mcustiel/php-simple-conversion/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mcustiel/php-simple-conversion/?branch=master)
+
 Installation
 ------------
 
