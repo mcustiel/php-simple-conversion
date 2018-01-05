@@ -128,6 +128,25 @@ Then you just need to inject the ConversionService to any class where you want t
 
 The library will automatically take care of resolving the registered service and calling it to convert your object to the desired one.
 
+#### Converting from parent class
+
+Optionally, you can tell the conversion service to search for a converter configured for a parent class.
+Supose you have a class B that inherits from class C, a converter from C to A, and you want to convert from B to A. This is possible by telling the converter to search for converters for parent classes:
+
+```php
+use Mcustiel\PhpSimpleConversion\ConversionService;
+use Mcustiel\PhpSimpleConversion\ConverterBuilder;
+
+$conversionService = new ConversionService();
+// ...
+$converter = ConverterBuilder::get()
+    ->from(C::class)
+    ->to(A::class)
+    ->withImplementation(CtoAConverter::class);
+$conversionService->registerConverter($converter);
+$b = new B();
+$a = $conversionService->convert($b, A::class, ConversionService::ALLOW_PARENTS);
+```
 
 Notes
 -----

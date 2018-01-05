@@ -29,6 +29,8 @@ use Mcustiel\Conversion\Exception\TryingInvalidConversionException;
  */
 class ConversionService
 {
+    const ALLOW_PARENTS = true;
+
     /**
      * @var ConverterContainer
      */
