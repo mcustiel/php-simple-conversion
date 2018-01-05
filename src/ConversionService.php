@@ -61,13 +61,10 @@ class ConversionService
 
                 return $converter->convert($object);
             } catch (ConverterDoesNotExistException $e) {
-                if (!$iterateParents) {
-                    throw $e;
-                } elseif (class_exists($from)) {
-                    $from = get_parent_class($from);
-                }
+                $from = $this->manageException($iterateParents, $from, $e);
             }
         } while ($from);
+
         throw new ConverterDoesNotExistException(
             "Converter from {$originalType} to {$toClass} does not exist"
         );
@@ -81,6 +78,22 @@ class ConversionService
     public function registerConverter(ConverterBuilder $builder)
     {
         $this->container->addConverter($builder);
+    }
+
+    /**
+     * @param bool       $iterateParents
+     * @param string     $from
+     * @param \Exception $e
+     */
+    private function manageException($iterateParents, $from, $e)
+    {
+        if (!$iterateParents) {
+            throw $e;
+        } elseif (class_exists($from)) {
+            $from = get_parent_class($from);
+        }
+
+        return $from;
     }
 
     /**
