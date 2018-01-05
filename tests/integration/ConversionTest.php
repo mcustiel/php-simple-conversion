@@ -99,7 +99,8 @@ class ConversionTest extends \PHPUnit_Framework_TestCase
         $this->addDefaultConverter();
         $a = $this->buildAClass();
 
-        $service = new ConversionService();
+        $service = new ConversionService($this->conversionService);
+
         $b = $service->convert($a, B::class);
 
         $this->assertBIsCorrect($b);

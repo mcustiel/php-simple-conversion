@@ -22,7 +22,6 @@ use Fixtures\AToBConverter;
 use Fixtures\B;
 use Mcustiel\Conversion\ConverterBuilder;
 use Mcustiel\Conversion\SingletonConverterContainer;
-use SplFileObject;
 
 class ConverterContainerTest extends \PHPUnit_Framework_TestCase
 {
@@ -69,11 +68,11 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException        \Mcustiel\Conversion\Exception\ConverterDoesNotExistException
-     * @expectedExceptionMessage Converter from FileObject to stdClass does not exist
+     * @expectedExceptionMessage Converter from SplFileObject to stdClass does not exist
      */
     public function testShouldFailIfConverterNotRegistered()
     {
-        SingletonConverterContainer::getInstance()->getConverter(SplFileObject::class, \stdClass::class);
+        SingletonConverterContainer::getInstance()->getConverter(\SplFileObject::class, \stdClass::class);
     }
 
     /**
