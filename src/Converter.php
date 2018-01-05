@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Mcustiel\Conversion;
 
 /**
@@ -27,7 +28,7 @@ interface Converter
     /**
      * Converts the given object.
      *
-     * @param string|array|object $object The object to convert.
+     * @param string|array|object $object the object to convert
      */
     public function convert($object);
 }

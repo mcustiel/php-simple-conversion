@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Mcustiel\Conversion;
 
 use Mcustiel\Conversion\Exception\TryingInvalidConversionException;
@@ -28,7 +29,6 @@ use Mcustiel\Conversion\Exception\TryingInvalidConversionException;
 class ConversionService
 {
     /**
-     *
      * @var ConverterContainer
      */
     private $container;
@@ -44,7 +44,7 @@ class ConversionService
     /**
      * Converts a given object to another type.
      *
-     * @param string|array|object $object  The object to convert.
+     * @param string|array|object $object  the object to convert
      * @param string              $toClass The name of the class to which the object will be converted
      */
     public function convert($object, $toClass)
@@ -67,7 +67,9 @@ class ConversionService
 
     /**
      * @param mixed $object
+     *
      * @throws TryingInvalidConversionException
+     *
      * @return string
      */
     private function getTypeOf($object)

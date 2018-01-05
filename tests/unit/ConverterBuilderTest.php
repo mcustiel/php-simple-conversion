@@ -15,12 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Unit;
 
-use Mcustiel\Conversion\ConverterBuilder;
+use Fixtures\A;
 use Fixtures\AToBConverter;
 use Fixtures\B;
-use Fixtures\A;
+use Mcustiel\Conversion\ConverterBuilder;
 
 class ConverterBuilderTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,7 +37,6 @@ class ConverterBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException         \InvalidArgumentException
      * @expectedExceptionMesesage 'From' parameter should be a string containing 'string', 'array', or a class name
      */
     public function testSetFromWithInvalidValue()
@@ -46,7 +46,6 @@ class ConverterBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException         \InvalidArgumentException
      * @expectedExceptionMesesage 'To' parameter should be a string containing 'string', 'array', or a class name
      */
     public function testSetToWithInvalidValue()

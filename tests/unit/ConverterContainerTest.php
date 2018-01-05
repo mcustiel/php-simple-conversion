@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Unit;
 
 use Fixtures\A;
@@ -40,10 +41,6 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionMessage From is unset
-     */
     public function testShouldFailWithoutFrom()
     {
         $builder = ConverterBuilder::get()
@@ -53,10 +50,6 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
             ->addConverter($builder);
     }
 
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionMessage To is unset
-     */
     public function testShouldFailWithoutTo()
     {
         $builder = ConverterBuilder::get()
@@ -66,19 +59,11 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
             ->addConverter($builder);
     }
 
-    /**
-     * @expectedException        \Mcustiel\Conversion\Exception\ConverterDoesNotExistException
-     * @expectedExceptionMessage Converter from SplFileObject to stdClass does not exist
-     */
     public function testShouldFailIfConverterNotRegistered()
     {
         SingletonConverterContainer::getInstance()->getConverter(\SplFileObject::class, \stdClass::class);
     }
 
-    /**
-     * @expectedException        \Mcustiel\Conversion\Exception\ObjectIsNotConverterException
-     * @expectedExceptionMessage Object of type stdClass does not implement Mcustiel\Conversion\Converter
-     */
     public function testShouldFailWhenImplementationIsNotConverter()
     {
         $builder = ConverterBuilder::get()

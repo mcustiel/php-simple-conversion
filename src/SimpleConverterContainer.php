@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Mcustiel\Conversion;
 
 use Mcustiel\Conversion\Exception\ConverterDoesNotExistException;
@@ -27,7 +28,6 @@ use Mcustiel\Conversion\Exception\ConverterDoesNotExistException;
 class SimpleConverterContainer implements ConverterContainer
 {
     /**
-     *
      * @var ConverterBuilder|Converter[][]
      */
     private $converters = [];
@@ -35,8 +35,9 @@ class SimpleConverterContainer implements ConverterContainer
     /**
      * Registers a converter.
      *
-     * @param ConverterBuilder $converterBuilder The builder of the converter to register.
-     * @throws \InvalidArgumentException If from or to are unset.
+     * @param ConverterBuilder $converterBuilder the builder of the converter to register
+     *
+     * @throws \InvalidArgumentException if from or to are unset
      */
     public function addConverter(ConverterBuilder $converterBuilder)
     {
@@ -50,8 +51,8 @@ class SimpleConverterContainer implements ConverterContainer
     /**
      * Access the implementation of the converter for the given from and to parameters.
      *
-     * @param string $from The type from which the converter converts.
-     * @param string $to   The type to which the converter converts to.
+     * @param string $from the type from which the converter converts
+     * @param string $to   the type to which the converter converts to
      *
      * @throws \Mcustiel\Conversion\Exception\ConverterDoesNotExistException
      *
@@ -74,14 +75,15 @@ class SimpleConverterContainer implements ConverterContainer
 
     /**
      * @param converter
+     * @param mixed $converter
      */
     private function validateBuilder($converter)
     {
         if (empty($converter->getFrom())) {
-            throw new \InvalidArgumentException("From is unset");
+            throw new \InvalidArgumentException('From is unset');
         }
         if (empty($converter->getTo())) {
-            throw new \InvalidArgumentException("To is unset");
+            throw new \InvalidArgumentException('To is unset');
         }
     }
 }

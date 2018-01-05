@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Fixtures;
 
 use Mcustiel\Conversion\Converter;
@@ -26,8 +27,8 @@ class AToBConverter implements Converter
 {
     public function convert($a)
     {
-        if (! ($a instanceof A)) {
-            throw new \InvalidArgumentException("Should convert only from A");
+        if (!($a instanceof A)) {
+            throw new \InvalidArgumentException('Should convert only from A');
         }
         $return = new B();
 

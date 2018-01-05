@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Fixtures;
 
 /**
@@ -39,6 +40,7 @@ class A
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -50,6 +52,7 @@ class A
     public function setJsonString($jsonString)
     {
         $this->jsonString = $jsonString;
+
         return $this;
     }
 }

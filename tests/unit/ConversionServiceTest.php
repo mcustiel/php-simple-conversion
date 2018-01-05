@@ -15,14 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Unit;
 
-use Mcustiel\Conversion\ConversionService;
-use Mcustiel\Conversion\ConverterBuilder;
 use Fixtures\A;
-use Fixtures\B;
 use Fixtures\AToBConverter;
+use Fixtures\B;
+use Mcustiel\Conversion\ConversionService;
 use Mcustiel\Conversion\Converter;
+use Mcustiel\Conversion\ConverterBuilder;
 use Mcustiel\Conversion\ConverterContainer;
 
 class ConversionServiceTest extends \PHPUnit_Framework_TestCase
@@ -111,15 +112,10 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
         $this->service->convert([], B::class);
     }
 
-    /**
-     * @expectedException        \Mcustiel\Conversion\Exception\TryingInvalidConversionException
-     * @expectedExceptionMessage Trying to convert from 'integer'. Can only convert from string, array or object
-     */
     public function testShouldThrowExceptionWhenCalledWithInvalidFromType()
     {
         $this->service->convert(5, B::class);
     }
-
 
     private function getConverterBuilderToRegister()
     {
@@ -127,6 +123,7 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
             ->from(A::class)
             ->to(B::class)
             ->withImplementation(AToBConverter::class);
+
         return $register;
     }
 }

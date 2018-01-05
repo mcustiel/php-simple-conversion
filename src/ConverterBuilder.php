@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Mcustiel\Conversion;
 
 use Mcustiel\Conversion\Exception\ObjectIsNotConverterException;
@@ -24,22 +25,18 @@ use Mcustiel\Conversion\Exception\ObjectIsNotConverterException;
  * define the needed values to register the converter.
  *
  * @author mcustiel
- *
  */
 class ConverterBuilder
 {
     /**
-     *
      * @var string
      */
     private $from;
     /**
-     *
      * @var string
      */
     private $to;
     /**
-     *
      * @var callable
      */
     private $converter;
@@ -68,6 +65,7 @@ class ConverterBuilder
      *                     the full name of a class.
      *
      * @throws \InvalidArgumentException When given parameter is not a string
+     *
      * @return \Mcustiel\Conversion\ConverterBuilder
      */
     public function from($from)
@@ -85,9 +83,10 @@ class ConverterBuilder
     /**
      * Specifies to which type the converter will convert to.
      *
-     * @param string $to A string specifying the destination type of the conversion.
+     * @param string $to a string specifying the destination type of the conversion
      *
      * @throws \InvalidArgumentException When given parameter is not a string
+     *
      * @return \Mcustiel\Conversion\ConverterBuilder
      */
     public function to($to)
@@ -103,7 +102,7 @@ class ConverterBuilder
     }
 
     /**
-     * Returns the value of 'to'
+     * Returns the value of 'to'.
      *
      * @return string
      */
@@ -113,7 +112,7 @@ class ConverterBuilder
     }
 
     /**
-     * Returns the value of 'from'
+     * Returns the value of 'from'.
      */
     public function getFrom()
     {
@@ -144,23 +143,22 @@ class ConverterBuilder
         return $this;
     }
 
+    /**
+     * Returns an instance of the converter.
+     *
+     * @return mixed the return value of the convert method in the converter implementation
+     */
+    public function getConverter()
+    {
+        return call_user_func($this->converter);
+    }
+
     private function getObjectFromClass($class)
     {
         if (is_object($class)) {
             return $class;
         }
 
-        return new $class;
-    }
-
-
-    /**
-     * Returns an instance of the converter.
-     *
-     * @return mixed The return value of the convert method in the converter implementation.
-     */
-    public function getConverter()
-    {
-        return call_user_func($this->converter);
+        return new $class();
     }
 }

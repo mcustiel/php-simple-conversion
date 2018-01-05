@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Fixtures;
 
 /**
@@ -35,6 +36,7 @@ class B
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -46,6 +48,7 @@ class B
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+
         return $this;
     }
 
@@ -57,6 +60,7 @@ class B
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 
@@ -68,6 +72,7 @@ class B
     public function setAge($age)
     {
         $this->age = $age;
+
         return $this;
     }
 }

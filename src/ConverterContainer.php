@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with php-simple-conversion.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace Mcustiel\Conversion;
 
 interface ConverterContainer
@@ -23,7 +24,7 @@ interface ConverterContainer
      * @param ConverterBuilder $builder
      */
     public function addConverter(ConverterBuilder $builder);
-    
+
     /**
      * @param string $from
      * @param string $to
