@@ -20,23 +20,8 @@ This project is published in packagist, so you just need to add it as a dependen
 ```javascript
 "require": {
         // ...
-        "mcustiel/php-simple-conversion": "1.0.*"
+        "mcustiel/php-simple-conversion": "*"
     }
-```
-
-If you want to access directly to this repo, adding this to your composer.json should be enough:
-```javascript  
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/mcustiel/php-simple-conversion"
-        }
-    ],
-    "require": {
-        "mcustiel/php-simple-conversion": "dev-master"
-    }
-}
 ```
 
 Or just download the release and include it in your path.
