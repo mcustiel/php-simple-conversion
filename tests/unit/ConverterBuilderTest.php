@@ -41,6 +41,10 @@ class ConverterBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFromWithInvalidValue()
     {
+        $this->setExpectedException(
+            \InvalidArgumentException::class,
+            "'From' parameter should be a string containing 'string', 'array', or a class name"
+        );
         $builder = ConverterBuilder::get();
         $builder->from(5);
     }
@@ -50,6 +54,10 @@ class ConverterBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetToWithInvalidValue()
     {
+        $this->setExpectedException(
+            \InvalidArgumentException::class,
+            "'To' parameter should be a string containing a type name"
+        );
         $builder = ConverterBuilder::get();
         $builder->to(5);
     }

@@ -25,6 +25,7 @@ use Mcustiel\Conversion\ConversionService;
 use Mcustiel\Conversion\Converter;
 use Mcustiel\Conversion\ConverterBuilder;
 use Mcustiel\Conversion\ConverterContainer;
+use Mcustiel\Conversion\Exception\TryingInvalidConversionException;
 
 class ConversionServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -114,6 +115,10 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldThrowExceptionWhenCalledWithInvalidFromType()
     {
+        $this->setExpectedException(
+            TryingInvalidConversionException::class,
+            "Trying to convert from 'integer'. Can only convert from string, array or object"
+        );
         $this->service->convert(5, B::class);
     }
 

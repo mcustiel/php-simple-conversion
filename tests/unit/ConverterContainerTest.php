@@ -23,6 +23,8 @@ use Fixtures\AToBConverter;
 use Fixtures\B;
 use Mcustiel\Conversion\ConverterBuilder;
 use Mcustiel\Conversion\SingletonConverterContainer;
+use Mcustiel\Conversion\Exception\ObjectIsNotConverterException;
+use Mcustiel\Conversion\Exception\ConverterDoesNotExistException;
 
 class ConverterContainerTest extends \PHPUnit_Framework_TestCase
 {
@@ -43,6 +45,10 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldFailWithoutFrom()
     {
+        $this->setExpectedException(
+            \InvalidArgumentException::class,
+            'From is unset'
+        );
         $builder = ConverterBuilder::get()
             ->to(B::class)
             ->withImplementation(AToBConverter::class);
@@ -52,6 +58,10 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldFailWithoutTo()
     {
+        $this->setExpectedException(
+            \InvalidArgumentException::class,
+            'To is unset'
+        );
         $builder = ConverterBuilder::get()
             ->from(A::class)
             ->withImplementation(AToBConverter::class);
@@ -61,11 +71,19 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldFailIfConverterNotRegistered()
     {
+        $this->setExpectedException(
+            ConverterDoesNotExistException::class,
+            'Converter from SplFileObject to stdClass does not exist'
+        );
         SingletonConverterContainer::getInstance()->getConverter(\SplFileObject::class, \stdClass::class);
     }
 
     public function testShouldFailWhenImplementationIsNotConverter()
     {
+        $this->setExpectedException(
+            ObjectIsNotConverterException::class,
+            'Object of type stdClass does not implement Mcustiel\Conversion\Converter'
+        );
         $builder = ConverterBuilder::get()
             ->from(A::class)
             ->to(B::class)

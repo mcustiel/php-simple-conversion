@@ -26,6 +26,7 @@ use Mcustiel\Conversion\Converter;
 use Mcustiel\Conversion\ConverterBuilder;
 use Mcustiel\Conversion\SimpleConverterContainer;
 use Mcustiel\Conversion\SingletonConverterContainer;
+use Mcustiel\Conversion\Exception\ObjectIsNotConverterException;
 
 class ConversionTest extends \PHPUnit_Framework_TestCase
 {
@@ -61,6 +62,11 @@ class ConversionTest extends \PHPUnit_Framework_TestCase
 
     public function testIfConverterContainerFailsUsingInstanceOfIncorrectType()
     {
+        $this->setExpectedException(
+            ObjectIsNotConverterException::class,
+            'Object of type stdClass does not implement Mcustiel\Conversion\Converter'
+        );
+
         $builder = ConverterBuilder::get()
             ->from(A::class)
             ->to(B::class)
@@ -104,6 +110,10 @@ class ConversionTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldThrowAnExceptionWhenImplementationIsNotConverter()
     {
+        $this->setExpectedException(
+            ObjectIsNotConverterException::class,
+            'Object of type stdClass does not implement Mcustiel\Conversion\Converter'
+        );
         $this->conversionService = SingletonConverterContainer::getInstance();
         $builder = ConverterBuilder::get()
             ->from(B::class)
