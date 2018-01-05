@@ -23,6 +23,7 @@ use Fixtures\A;
 use Fixtures\B;
 use Fixtures\AToBConverter;
 use Mcustiel\Conversion\Converter;
+use Mcustiel\Conversion\ConverterContainer;
 
 class ConversionServiceTest extends \PHPUnit_Framework_TestCase
 {

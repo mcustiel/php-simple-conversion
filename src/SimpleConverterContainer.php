@@ -46,14 +46,14 @@ class SimpleConverterContainer implements ConverterContainer
         }
         $this->converters[$converterBuilder->getFrom()][$converterBuilder->getTo()] = $converterBuilder;
     }
-    
+
     /**
      * Access the implementation of the converter for the given from and to parameters.
      *
      * @param string $from The type from which the converter converts.
      * @param string $to   The type to which the converter converts to.
      *
-     * @throws Mcustiel\Conversion\Exception\ConverterDoesNotExistException
+     * @throws \Mcustiel\Conversion\Exception\ConverterDoesNotExistException
      *
      * @return Converter
      */
@@ -71,7 +71,7 @@ class SimpleConverterContainer implements ConverterContainer
 
         return $this->converters[$from][$to];
     }
-    
+
     /**
      * @param converter
      */

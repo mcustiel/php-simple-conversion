@@ -17,8 +17,6 @@
  */
 namespace Mcustiel\Conversion;
 
-use Mcustiel\Conversion\Exception\ConverterDoesNotExistException;
-
 /**
  * Singleton class the holds all the registered converters, and allows to access them.
  *
@@ -77,7 +75,7 @@ class SingletonConverterContainer implements ConverterContainer
      * @param string $from The type from which the converter converts.
      * @param string $to   The type to which the converter converts to.
      *
-     * @throws Mcustiel\Conversion\Exception\ConverterDoesNotExistException
+     * @throws \Mcustiel\Conversion\Exception\ConverterDoesNotExistException
      *
      * @return Converter
      */

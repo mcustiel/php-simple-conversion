@@ -17,12 +17,12 @@
  */
 namespace Unit;
 
-use Mcustiel\Conversion\ConverterBuilder;
 use Fixtures\A;
-use Fixtures\B;
 use Fixtures\AToBConverter;
+use Fixtures\B;
+use Mcustiel\Conversion\ConverterBuilder;
 use Mcustiel\Conversion\SingletonConverterContainer;
-use Mcustiel\Conversion\ConversionService;
+use SplFileObject;
 
 class ConverterContainerTest extends \PHPUnit_Framework_TestCase
 {
@@ -73,7 +73,7 @@ class ConverterContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldFailIfConverterNotRegistered()
     {
-        SingletonConverterContainer::getInstance()->getConverter(\FileObject::class, \stdClass::class);
+        SingletonConverterContainer::getInstance()->getConverter(SplFileObject::class, \stdClass::class);
     }
 
     /**
