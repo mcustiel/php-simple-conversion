@@ -20,4 +20,10 @@ build:
   environment:
     php:
       version: 5.6.9
- 
+  tests:
+    override:
+      -
+        command: './vendor/bin/phpunit -c tests --coverage-clover=clover.xml'
+        coverage:
+          file: 'clover.xml'
+          format: 'clover
