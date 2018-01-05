@@ -36,9 +36,6 @@ class ConverterBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = $builder->withImplementation(AToBConverter::class);
     }
 
-    /**
-     * @expectedExceptionMesesage 'From' parameter should be a string containing 'string', 'array', or a class name
-     */
     public function testSetFromWithInvalidValue()
     {
         $this->setExpectedException(
@@ -49,9 +46,6 @@ class ConverterBuilderTest extends \PHPUnit_Framework_TestCase
         $builder->from(5);
     }
 
-    /**
-     * @expectedExceptionMesesage 'To' parameter should be a string containing 'string', 'array', or a class name
-     */
     public function testSetToWithInvalidValue()
     {
         $this->setExpectedException(

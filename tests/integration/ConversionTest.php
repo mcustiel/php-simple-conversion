@@ -24,9 +24,9 @@ use Fixtures\B;
 use Mcustiel\Conversion\ConversionService;
 use Mcustiel\Conversion\Converter;
 use Mcustiel\Conversion\ConverterBuilder;
+use Mcustiel\Conversion\Exception\ObjectIsNotConverterException;
 use Mcustiel\Conversion\SimpleConverterContainer;
 use Mcustiel\Conversion\SingletonConverterContainer;
-use Mcustiel\Conversion\Exception\ObjectIsNotConverterException;
 
 class ConversionTest extends \PHPUnit_Framework_TestCase
 {

@@ -45,9 +45,10 @@ class ConversionService
     /**
      * Converts a given object to another type.
      *
-     * @param string|array|object $object         The object to convert.
+     * @param string|array|object $object         the object to convert
      * @param string              $toClass        The name of the class to which the object will be converted
      * @param bool                $iterateParents Whether or not to search for a converter for the parent class
+     *
      * @throws ConverterDoesNotExistException
      */
     public function convert($object, $toClass, $iterateParents = false)
@@ -57,6 +58,7 @@ class ConversionService
         do {
             try {
                 $converter = $this->container->getConverter($from, $toClass);
+
                 return $converter->convert($object);
             } catch (ConverterDoesNotExistException $e) {
                 if (!$iterateParents) {

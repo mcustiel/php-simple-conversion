@@ -22,9 +22,9 @@ use Fixtures\A;
 use Fixtures\AToBConverter;
 use Fixtures\B;
 use Mcustiel\Conversion\ConverterBuilder;
-use Mcustiel\Conversion\SingletonConverterContainer;
-use Mcustiel\Conversion\Exception\ObjectIsNotConverterException;
 use Mcustiel\Conversion\Exception\ConverterDoesNotExistException;
+use Mcustiel\Conversion\Exception\ObjectIsNotConverterException;
+use Mcustiel\Conversion\SingletonConverterContainer;
 
 class ConverterContainerTest extends \PHPUnit_Framework_TestCase
 {

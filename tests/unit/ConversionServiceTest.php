@@ -18,15 +18,16 @@
 
 namespace Unit;
 
-use Fixtures\C;
-use Mcustiel\Conversion\ConverterContainer;
-use Mcustiel\Conversion\ConverterBuilder;
 use Fixtures\A;
 use Fixtures\AToBConverter;
 use Fixtures\B;
+use Fixtures\C;
 use Mcustiel\Conversion\ConversionService;
 use Mcustiel\Conversion\Converter;
+use Mcustiel\Conversion\ConverterBuilder;
+use Mcustiel\Conversion\ConverterContainer;
 use Mcustiel\Conversion\Exception\ConverterDoesNotExistException;
+use Mcustiel\Conversion\Exception\TryingInvalidConversionException;
 
 class ConversionServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -140,6 +141,7 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
                     if ($from === C::class) {
                         throw new ConverterDoesNotExistException('');
                     }
+
                     return $this->converterMock;
                 })
             );
@@ -154,11 +156,9 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $this->service->convert($toConvert, B::class, true));
     }
 
-    /**
-     * @expectedException \Mcustiel\Conversion\Exception\ConverterDoesNotExistException
-     */
     public function testIfFailsWhenConvertingFromParentNotAllowed()
     {
+        $this->setExpectedException(ConverterDoesNotExistException::class);
         $toConvert = new C(1, '');
 
         $this->containerMock
@@ -170,12 +170,12 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
         $this->service->convert($toConvert, B::class);
     }
 
-    /**
-     * @expectedException \Mcustiel\Conversion\Exception\ConverterDoesNotExistException
-     * @expectedExceptionMessage Converter from Fixtures\C to Fixtures\A does not exist
-     */
     public function testIfNoConverterForParentClass()
     {
+        $this->setExpectedException(
+            ConverterDoesNotExistException::class,
+            'Converter from Fixtures\C to Fixtures\A does not exist'
+        );
         $toConvert = new C(1, '');
 
         $this->containerMock
@@ -188,7 +188,6 @@ class ConversionServiceTest extends \PHPUnit_Framework_TestCase
             ->willThrowException(new ConverterDoesNotExistException(''));
         $this->service->convert($toConvert, A::class, true);
     }
-
 
     private function getConverterBuilderToRegister()
     {
