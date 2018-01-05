@@ -10,6 +10,11 @@
         <!-- CHANGE TO "." WHEN OTHER BILLING TESTS OK -->
         <directory>./unit</directory>
     </testsuite>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">../src</directory>
+		</whitelist>
+	</filter>
 	<php>
 		<ini name="display_startup_errors" value="1" />
 		<ini name="display_errors" value="1" />

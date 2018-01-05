@@ -20,8 +20,8 @@
 	"autoload-dev": {
 	   "psr-4": {
 	       "Unit\\" : "tests/unit",
-           "Integration\\" : "tests/integration",
-           "Fixtures\\" : "tests/fixtures"
+               "Integration\\" : "tests/integration",
+               "Fixtures\\" : "tests/fixtures"
 	   }
 	},
 	"name" : "mcustiel/php-simple-conversion",
